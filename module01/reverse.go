@@ -1,4 +1,6 @@
-package module01
+package main
+
+import "fmt"
 
 // Reverse will return the provided word in reverse
 // order. Eg:
@@ -24,14 +26,21 @@ func Reverse(word string) string {
 	default:
 		iters = (wLen - 1) / 2
 	}
-	// Index error, TODO
+
 	container := make([]byte, wLen)
+	if iters%2 != 0 {
+		container[iters+1] = word[iters+1]
+	}
 	for i := 0; i < iters; i++ {
-		right := wLen - i
+		right := wLen - i - 1
 		container[i] = word[right]
 		container[right] = word[i]
 	}
 
 	return string(container)
 
+}
+
+func main() {
+	fmt.Println(Reverse("hello"))
 }
