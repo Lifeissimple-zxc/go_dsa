@@ -15,21 +15,26 @@ func Reverse(word string) string {
 	// }
 	// return res
 
+	// Option 2: O(n/2), but struggling to understand how to make it work for unicode
 	// Get # of iterations
-	wLen := len(word) // saving to a variable bc of multiple uses
-	iters := wLen / 2
+	// wLen := len(word) // saving to a variable bc of multiple uses
+	// iters := wLen / 2
+	// container := make([]byte, wLen)
+	// for i := 0; i < iters; i++ {
+	// 	right := wLen - i - 1
+	// 	container[i], container[right] = word[right], word[i]
+	// }
+	// // Adding middle letter for words of odd len
+	// if wLen%2 != 0 {
+	// 	container[iters] = word[iters]
+	// }
+	// return string(container)
 
-	container := make([]byte, wLen)
-	for i := 0; i < iters; i++ {
-		right := wLen - i - 1
-		container[i] = word[right]
-		container[right] = word[i]
+	// Option 3: Linear, but works with Unicode
+	res := ""
+	for _, ch := range word {
+		res = string(ch) + res
 	}
-	// Adding middle letter for words of odd len
-	if wLen%2 != 0 {
-		container[iters] = word[iters]
-	}
-
-	return string(container)
+	return res
 
 }
