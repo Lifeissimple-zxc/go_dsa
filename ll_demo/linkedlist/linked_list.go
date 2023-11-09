@@ -82,3 +82,19 @@ func (l LinkedList) String() string {
 	}
 	return sb.String()
 }
+
+func (l *LinkedList) Reverse() {
+	// a
+	var prev *Node
+	current := l.Head
+	next := l.Head.Next
+
+	for next != nil {
+		current.Next = prev // reverse current node
+		prev = current      // update prev for next iteration
+		current = next      // move to the next node
+		next = next.Next    // update next
+		current.Next = prev
+	}
+	l.Head = current
+}

@@ -13,15 +13,9 @@ func main() {
 	ll.Add(4)
 	ll.Add(5)
 
-	okVal := ll.Get(4)
-	fmt.Println("Ok val:", okVal)
-	noVal := ll.Get(9999)
-	fmt.Println("No val:", noVal)
+	fmt.Println("List after creation", ll)
 
-	ll.Remove(3)
-	ll.Remove(1)
+	ll.Reverse()
 
-	fmt.Println(ll)
-
-	fmt.Println(ll.Remove(3))
+	fmt.Println("List after reversal", ll)
 }
