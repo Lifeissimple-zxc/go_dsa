@@ -18,4 +18,8 @@ func main() {
 	ll.Reverse()
 
 	fmt.Println("List after reversal", ll)
+
+	ll.Reverse()
+
+	fmt.Println("List after reversal2", ll)
 }

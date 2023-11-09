@@ -98,3 +98,17 @@ func (l *LinkedList) Reverse() {
 	}
 	l.Head = current
 }
+
+func (l *LinkedList) Reverse2() {
+	// Less aux variables
+	var reversedHead *Node // ala previous
+
+	for l.Head != nil {
+		next := l.Head.Next        // Save next for traversal
+		l.Head.Next = reversedHead // Reverse node's Next
+		reversedHead = l.Head
+		l.Head = next
+	}
+
+	l.Head = reversedHead
+}
