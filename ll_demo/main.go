@@ -16,10 +16,11 @@ func main() {
 	fmt.Println("List after creation", ll)
 
 	ll.Reverse()
-
 	fmt.Println("List after reversal", ll)
 
-	ll.Reverse()
-
+	ll.Reverse2()
 	fmt.Println("List after reversal2", ll)
+
+	ll.ReverseRecursive()
+	fmt.Println("List after recursive reversal", ll)
 }
