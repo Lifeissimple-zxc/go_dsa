@@ -131,8 +131,7 @@ func (l *LinkedList) ReverseRecursive() {
 			l.Head.Next = prev
 			return
 		}
-		nxt := l.Head.Next
-		l.Head.Next, prev, l.Head = prev, l.Head, nxt
+		l.Head.Next, prev, l.Head = prev, l.Head, l.Head.Next
 		reversal(l)
 	}
 	reversal(l)
