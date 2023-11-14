@@ -84,7 +84,9 @@ func (l LinkedList) String() string {
 }
 
 func (l *LinkedList) Reverse() {
-	// a
+	if l.Head == nil || l == nil {
+		return
+	}
 	var prev *Node
 	current := l.Head
 	next := l.Head.Next
@@ -100,6 +102,9 @@ func (l *LinkedList) Reverse() {
 }
 
 func (l *LinkedList) Reverse2() {
+	if l.Head == nil || l == nil {
+		return
+	}
 	// Less aux variables
 	var reversedHead *Node // ala previous
 
@@ -114,6 +119,9 @@ func (l *LinkedList) Reverse2() {
 }
 
 func (l *LinkedList) ReverseRecursive() {
+	if l.Head == nil || l == nil {
+		return
+	}
 	var prev *Node
 
 	var reversal func(l *LinkedList)
@@ -129,7 +137,6 @@ func (l *LinkedList) ReverseRecursive() {
 		l.Head.Next = prev
 		prev = l.Head
 		l.Head = nxt
-		// head at 2
 		reversal(l)
 	}
 	reversal(l)
