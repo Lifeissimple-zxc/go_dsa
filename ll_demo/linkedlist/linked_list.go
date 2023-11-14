@@ -122,21 +122,17 @@ func (l *LinkedList) ReverseRecursive() {
 	if l.Head == nil || l == nil {
 		return
 	}
+
 	var prev *Node
 
 	var reversal func(l *LinkedList)
-
 	reversal = func(l *LinkedList) {
-
 		if l.Head.Next == nil {
 			l.Head.Next = prev
 			return
 		}
-
 		nxt := l.Head.Next
-		l.Head.Next = prev
-		prev = l.Head
-		l.Head = nxt
+		l.Head.Next, prev, l.Head = prev, l.Head, nxt
 		reversal(l)
 	}
 	reversal(l)
