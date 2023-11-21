@@ -19,7 +19,7 @@ type LinkedList struct {
 	Len  int
 }
 
-func (l *LinkedList) Add(value int) {
+func (l *LinkedList) add(value int) {
 	// We always start with creating a new node
 	newNode := &Node{
 		Val: value,
@@ -35,6 +35,12 @@ func (l *LinkedList) Add(value int) {
 	}
 	// update its pointer to add our new element there
 	cursor.Next = newNode
+}
+
+func (l *LinkedList) Add(values ...int) {
+	for _, val := range values {
+		l.add(val)
+	}
 }
 
 func (l *LinkedList) Get(value int) *Node {
@@ -135,4 +141,44 @@ func (l *LinkedList) ReverseRecursive() {
 		reversal(l)
 	}
 	reversal(l)
+}
+
+func MergeSortedLists(l1, l2 *LinkedList) *LinkedList {
+	// Quick nil scenario checks
+	if l1.Head == nil && l2.Head == nil {
+		return nil
+	}
+	if l1.Head == nil {
+		return l2
+	}
+	if l2.Head == nil {
+		return l1
+	}
+
+	resList := &LinkedList{}
+	for cur1, cur2 := l1.Head, l2.Head; cur1 != nil || cur2 != nil; {
+		// Check for nils
+		if cur1 != nil {
+			resList.add(cur1.Val)
+			cur1 = cur1.Next
+			continue
+		} else if cur1 == nil {
+			resList.add(cur2.Val)
+			cur2 = cur2.Next
+			continue
+		}
+
+		// Rest of the logic
+		if cur1.Val == cur2.Val {
+			resList.Add(cur1.Val, cur2.Val)
+			cur1, cur2 = cur1.Next, cur2.Next
+		} else if cur1.Val < cur2.Val {
+			resList.add(cur1.Val)
+			cur1 = cur1.Next
+		} else {
+			resList.add(cur2.Val)
+			cur2 = cur2.Next
+		}
+	}
+	return resList
 }
