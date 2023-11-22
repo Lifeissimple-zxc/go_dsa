@@ -145,9 +145,6 @@ func (l *LinkedList) ReverseRecursive() {
 
 func MergeSortedLists(l1, l2 *LinkedList) *LinkedList {
 	// Quick nil scenario checks
-	if l1.Head == nil && l2.Head == nil {
-		return nil
-	}
 	if l1.Head == nil {
 		return l2
 	}
@@ -169,10 +166,7 @@ func MergeSortedLists(l1, l2 *LinkedList) *LinkedList {
 		}
 
 		// Rest of the logic
-		if cur1.Val == cur2.Val {
-			resList.Add(cur1.Val, cur2.Val)
-			cur1, cur2 = cur1.Next, cur2.Next
-		} else if cur1.Val < cur2.Val {
+		if cur1.Val < cur2.Val {
 			resList.add(cur1.Val)
 			cur1 = cur1.Next
 		} else {
@@ -184,9 +178,6 @@ func MergeSortedLists(l1, l2 *LinkedList) *LinkedList {
 }
 
 func MergeSortedListsUsingHeads(h1, h2 *Node) *Node {
-	if h1 == nil && h2 == nil {
-		return nil
-	}
 	if h1 == nil {
 		return h2
 	}
@@ -199,44 +190,38 @@ func MergeSortedListsUsingHeads(h1, h2 *Node) *Node {
 	cur1, cur2 := h1, h2
 
 	// Assign head of the new list
-	if cur1.Val == cur2.Val {
-		hd = cur1
-		hd.Next = cur2
-		cur1, cur2 = cur1.Next, cur2.Next
-	} else if cur1.Val < cur2.Val {
+	if cur1.Val < cur2.Val {
 		hd = cur1
 		cur1 = cur1.Next
 	} else {
 		hd = cur2
 		cur2 = cur2.Next
 	}
+	ret := hd
 
 	for cur1 != nil || cur2 != nil {
-		if cur1 != nil {
+		if cur1 != nil && cur2 == nil {
 			hd.Next = cur1
 			cur1 = cur1.Next
 			hd = hd.Next
 			continue
-		} else if cur1 == nil {
+		} else if cur1 == nil && cur2 != nil {
 			hd.Next = cur2
 			cur2 = cur2.Next
 			hd = hd.Next
 			continue
 		}
 
-		if cur1.Val == cur2.Val {
-			hd.Next = cur1
-			hd.Next = cur2
-			cur1, cur2 = cur1.Next, cur2.Next
-		} else if cur1.Val < cur2.Val {
+		if cur1.Val < cur2.Val {
 			hd.Next = cur1
 			cur1 = cur1.Next
+			hd = hd.Next
 		} else {
 			hd.Next = cur2
 			cur2 = cur2.Next
+			hd = hd.Next
 		}
-		hd = hd.Next
 
 	}
-	return hd
+	return ret
 }
