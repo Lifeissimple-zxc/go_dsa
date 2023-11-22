@@ -158,11 +158,11 @@ func MergeSortedLists(l1, l2 *LinkedList) *LinkedList {
 	resList := &LinkedList{}
 	for cur1, cur2 := l1.Head, l2.Head; cur1 != nil || cur2 != nil; {
 		// Check for nils
-		if cur1 != nil {
+		if cur1 != nil && cur2 == nil {
 			resList.add(cur1.Val)
 			cur1 = cur1.Next
 			continue
-		} else if cur1 == nil {
+		} else if cur1 == nil && cur2 != nil {
 			resList.add(cur2.Val)
 			cur2 = cur2.Next
 			continue
@@ -181,4 +181,62 @@ func MergeSortedLists(l1, l2 *LinkedList) *LinkedList {
 		}
 	}
 	return resList
+}
+
+func MergeSortedListsUsingHeads(h1, h2 *Node) *Node {
+	if h1 == nil && h2 == nil {
+		return nil
+	}
+	if h1 == nil {
+		return h2
+	}
+	if h2 == nil {
+		return h1
+	}
+
+	// Getting here means we actually need to do the merge work
+	var hd *Node
+	cur1, cur2 := h1, h2
+
+	// Assign head of the new list
+	if cur1.Val == cur2.Val {
+		hd = cur1
+		hd.Next = cur2
+		cur1, cur2 = cur1.Next, cur2.Next
+	} else if cur1.Val < cur2.Val {
+		hd = cur1
+		cur1 = cur1.Next
+	} else {
+		hd = cur2
+		cur2 = cur2.Next
+	}
+
+	for cur1 != nil || cur2 != nil {
+		if cur1 != nil {
+			hd.Next = cur1
+			cur1 = cur1.Next
+			hd = hd.Next
+			continue
+		} else if cur1 == nil {
+			hd.Next = cur2
+			cur2 = cur2.Next
+			hd = hd.Next
+			continue
+		}
+
+		if cur1.Val == cur2.Val {
+			hd.Next = cur1
+			hd.Next = cur2
+			cur1, cur2 = cur1.Next, cur2.Next
+		} else if cur1.Val < cur2.Val {
+			hd.Next = cur1
+			cur1 = cur1.Next
+		} else {
+			hd.Next = cur2
+			cur2 = cur2.Next
+		}
+		hd = hd.Next
+
+	}
+	return hd
 }
