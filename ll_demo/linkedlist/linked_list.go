@@ -231,3 +231,63 @@ func MergeSortedListsUsingHeads(h1, h2 *Node) *Node {
 	}
 	return ret
 }
+
+// FindInterSection locates where l1 and l2 intersect (memory address based)
+// When there is no intersection, it returns a nil
+func FindInterSection(l1 *LinkedList, l2 *LinkedList) *Node {
+	// Allocate a map to store traversal results
+	listData := make(map[int]*Node)
+	// Traverse l1 saving it's data to a map of int[*Node] data structure
+	var cursor *Node
+	for cursor = l1.Head; cursor != nil; cursor = cursor.Next {
+		listData[cursor.Val] = cursor
+	}
+	// Traverse l2 doing lookups
+	for cursor = l2.Head; cursor != nil; cursor = cursor.Next {
+		node, ok := listData[cursor.Val]
+		if !ok {
+			continue
+		}
+		if node == cursor {
+			return node
+		}
+	}
+	// Reaching this point means there is no intersection
+	return nil
+}
+
+// FindInterSectionWithDuplicates is like FindInterSection, but
+// Supports linked lists where multiple nodes have the same value
+func FindInterSectionWithDuplicates(l1 *LinkedList, l2 *LinkedList) *Node {
+	// Allocate a map to store traversal results
+	listData := make(map[int][]*Node)
+	// Traverse l1 saving it's data to a map
+	var cursor *Node
+	for cursor = l1.Head; cursor != nil; cursor = cursor.Next {
+		arr, ok := listData[cursor.Val]
+		if !ok {
+			// map has not data for this value
+			res := make([]*Node, 1)
+			res[0] = cursor
+			listData[cursor.Val] = res
+			continue
+		}
+		// Map has data, we append
+		listData[cursor.Val] = append(arr, cursor)
+
+	}
+	// Traverse l2 doing lookups
+	for cursor = l2.Head; cursor != nil; cursor = cursor.Next {
+		nodes, ok := listData[cursor.Val]
+		if !ok {
+			continue
+		}
+		for _, node := range nodes {
+			if node == cursor {
+				return node
+			}
+		}
+	}
+	// Reaching this point means there is no intersection
+	return nil
+}
