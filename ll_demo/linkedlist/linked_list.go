@@ -234,7 +234,7 @@ func MergeSortedListsUsingHeads(h1, h2 *Node) *Node {
 
 // FindInterSection locates where l1 and l2 intersect (memory address based)
 // When there is no intersection, it returns a nil
-func FindInterSection(l1 *LinkedList, l2 *LinkedList) *Node {
+func FindIntersection(l1 *LinkedList, l2 *LinkedList) *Node {
 	// Allocate a map to store traversal results
 	listData := make(map[int]*Node)
 	// Traverse l1 saving it's data to a map of int[*Node] data structure
@@ -257,8 +257,8 @@ func FindInterSection(l1 *LinkedList, l2 *LinkedList) *Node {
 }
 
 // FindInterSectionWithDuplicates is like FindInterSection, but
-// Supports linked lists where multiple nodes have the same value
-func FindInterSectionWithDuplicates(l1 *LinkedList, l2 *LinkedList) *Node {
+// supports linked lists where multiple nodes have the same value
+func FindIntersectionWithDuplicates(l1 *LinkedList, l2 *LinkedList) *Node {
 	// Allocate a map to store traversal results
 	listData := make(map[int][]*Node)
 	// Traverse l1 saving it's data to a map
@@ -278,6 +278,63 @@ func FindInterSectionWithDuplicates(l1 *LinkedList, l2 *LinkedList) *Node {
 	}
 	// Traverse l2 doing lookups
 	for cursor = l2.Head; cursor != nil; cursor = cursor.Next {
+		nodes, ok := listData[cursor.Val]
+		if !ok {
+			continue
+		}
+		for _, node := range nodes {
+			if node == cursor {
+				return node
+			}
+		}
+	}
+	// Reaching this point means there is no intersection
+	return nil
+}
+
+// FindInterSectionHeads is like FindInterSection
+// but takes heads of two linked lists as inputs
+func FindIntersectionHeads(l1 *Node, l2 *Node) *Node {
+	// Allocate a map to store traversal results
+	listData := make(map[int]*Node)
+	// Traverse l1 saving it's data to a map of int[*Node] data structure
+	var cursor *Node
+	for cursor = l1; cursor != nil; cursor = cursor.Next {
+		listData[cursor.Val] = cursor
+	}
+	// Traverse l2 doing lookups
+	for cursor = l2; cursor != nil; cursor = cursor.Next {
+		node, ok := listData[cursor.Val]
+		if !ok {
+			continue
+		}
+		if node == cursor {
+			return node
+		}
+	}
+	// Reaching this point means there is no intersection
+	return nil
+}
+
+// FindIntersectionHeadsWithDuplicates is like FindIntersectionHeads
+// supports linked lists where multiple nodes have the same value
+func FindIntersectionHeadsWithDuplicates(l1 *Node, l2 *Node) *Node {
+	// Allocate a map to store traversal results
+	listData := make(map[int][]*Node)
+	// Traverse l1 saving it's data to a map of int[*Node] data structure
+	var cursor *Node
+	for cursor = l1; cursor != nil; cursor = cursor.Next {
+		arr, ok := listData[cursor.Val]
+		if !ok {
+			res := make([]*Node, 1)
+			res[0] = cursor
+			listData[cursor.Val] = res
+			continue
+		}
+		listData[cursor.Val] = append(arr, cursor)
+	}
+	// Traverse l2 doing lookups
+	for cursor = l2; cursor != nil; cursor = cursor.Next {
 		nodes, ok := listData[cursor.Val]
 		if !ok {
 			continue

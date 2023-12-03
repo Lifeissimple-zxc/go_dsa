@@ -58,9 +58,15 @@ func main() {
 	iLL2.Tail.Next = intersection.Head
 	fmt.Println("LL2: ", iLL2)
 
-	intersectNode := linkedlist.FindInterSection(&iLL1, &iLL2)
+	intersectNode := linkedlist.FindIntersection(&iLL1, &iLL2)
 	fmt.Println("Intersection search result (assuming list are unique):", intersectNode)
 
-	intersectNodeDupl := linkedlist.FindInterSectionWithDuplicates(&iLL1, &iLL2)
+	intersectNodeDupl := linkedlist.FindIntersectionWithDuplicates(&iLL1, &iLL2)
 	fmt.Println("Intersection search result ", intersectNodeDupl)
+
+	intersectHeads := linkedlist.FindIntersectionHeads(iLL1.Head, iLL2.Head)
+	fmt.Println("Intersection search result with heads only", intersectHeads)
+
+	intersectHeadsDupl := linkedlist.FindIntersectionHeadsWithDuplicates(iLL1.Head, iLL2.Head)
+	fmt.Println("Intersection search result with heads only", intersectHeadsDupl)
 }
