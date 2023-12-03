@@ -43,5 +43,19 @@ func main() {
 	fmt.Println("LL Merged using Heads only:", mergedList2)
 
 	// Finding intersection of two LLs
+	fmt.Println("#### Finding intersection of two LLs ####")
+	intersection := linkedlist.LinkedList{}
+	intersection.Add(8, 4, 5)
+	fmt.Println("Intersection: ", intersection)
+
+	iLL1 := linkedlist.LinkedList{}
+	iLL1.Add(4, 1)
+	iLL1.Tail.Next = intersection.Head
+	fmt.Println("LL1: ", iLL1)
+
+	iLL2 := linkedlist.LinkedList{}
+	iLL2.Add(5, 6, 1)
+	iLL2.Tail.Next = intersection.Head
+	fmt.Println("LL2: ", iLL2)
 
 }

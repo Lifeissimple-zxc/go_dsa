@@ -40,6 +40,7 @@ func (l *LinkedList) add(value int) {
 	for ; cursor.Next != nil; cursor = cursor.Next {
 	}
 	// update its pointer to add our new element there
+	cursor.Next = newNode
 }
 
 func (l *LinkedList) Add(values ...int) {
