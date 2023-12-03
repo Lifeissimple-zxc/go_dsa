@@ -268,8 +268,7 @@ func FindIntersectionWithDuplicates(l1 *LinkedList, l2 *LinkedList) *Node {
 		if !ok {
 			// map has not data for this value
 			res := make([]*Node, 1)
-			res[0] = cursor
-			listData[cursor.Val] = res
+			res[0], listData[cursor.Val] = cursor, res
 			continue
 		}
 		// Map has data, we append
@@ -327,8 +326,7 @@ func FindIntersectionHeadsWithDuplicates(l1 *Node, l2 *Node) *Node {
 		arr, ok := listData[cursor.Val]
 		if !ok {
 			res := make([]*Node, 1)
-			res[0] = cursor
-			listData[cursor.Val] = res
+			res[0], listData[cursor.Val] = cursor, res
 			continue
 		}
 		listData[cursor.Val] = append(arr, cursor)
