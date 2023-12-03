@@ -16,6 +16,7 @@ func (n Node) String() string {
 
 type LinkedList struct {
 	Head *Node
+	Tail *Node
 	Len  int
 }
 
@@ -28,13 +29,17 @@ func (l *LinkedList) add(value int) {
 		l.Head = newNode
 		return
 	}
+	// Len increase happens always
+	defer func() {
+		l.Len++
+		l.Tail = newNode
+	}()
 	// find last item the list
 	cursor := l.Head // keeping it here because we need after the loop to update the ll
 	// cursor traversal happens here
 	for ; cursor.Next != nil; cursor = cursor.Next {
 	}
 	// update its pointer to add our new element there
-	cursor.Next = newNode
 }
 
 func (l *LinkedList) Add(values ...int) {

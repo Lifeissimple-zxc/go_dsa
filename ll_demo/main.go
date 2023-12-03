@@ -10,6 +10,8 @@ func main() {
 	fmt.Println("#### Reversing Linked List ####")
 	ll := linkedlist.LinkedList{}
 	ll.Add(1, 2, 3, 4, 5)
+	fmt.Printf("Len of list: %d\n", ll.Len)
+	fmt.Printf("List head: %v | List Tail %v\n", ll.Head, ll.Tail)
 
 	fmt.Println("List after creation", ll)
 
@@ -39,5 +41,7 @@ func main() {
 	mergedHead := linkedlist.MergeSortedListsUsingHeads(llToMerge.Head, llToMerge2.Head)
 	mergedList2 := &linkedlist.LinkedList{Head: mergedHead}
 	fmt.Println("LL Merged using Heads only:", mergedList2)
+
+	// Finding intersection of two LLs
 
 }
