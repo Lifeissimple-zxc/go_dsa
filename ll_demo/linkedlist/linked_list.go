@@ -346,3 +346,56 @@ func FindIntersectionHeadsWithDuplicates(l1 *Node, l2 *Node) *Node {
 	// Reaching this point means there is no intersection
 	return nil
 }
+
+// SimplePalindromeCheck checks if a given LinkedList is palindrome
+func SimplePalindromeCheck(l *LinkedList) bool {
+	if l == nil {
+		return false
+	}
+	// List of 1 len is always a palindrome
+	if l.Head.Next == nil {
+		return true
+	}
+	var cursor *Node
+	var listData []int
+
+	for cursor = l.Head; cursor != nil; cursor = cursor.Next {
+		listData = append(listData, cursor.Val)
+	}
+	cursor = l.Head
+
+	for i := len(listData) - 1; i >= 0; i-- {
+		if listData[i] != cursor.Val {
+			return false
+		}
+		cursor = cursor.Next
+	}
+	return true
+}
+
+// SimplePalindromeCheckHead is like SimplePalindromeCheck,
+// but operates on LL Heads of type Node
+func SimplePalindromeCheckHead(head *Node) bool {
+	if head == nil {
+		return false
+	}
+	// List of 1 len is always a palindrome
+	if head.Next == nil {
+		return true
+	}
+	var cursor *Node
+	var listData []int
+
+	for cursor = head; cursor != nil; cursor = cursor.Next {
+		listData = append(listData, cursor.Val)
+	}
+	cursor = head
+
+	for i := len(listData) - 1; i >= 0; i-- {
+		if listData[i] != cursor.Val {
+			return false
+		}
+		cursor = cursor.Next
+	}
+	return true
+}

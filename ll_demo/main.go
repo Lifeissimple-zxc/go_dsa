@@ -69,4 +69,35 @@ func main() {
 
 	intersectHeadsDupl := linkedlist.FindIntersectionHeadsWithDuplicates(iLL1.Head, iLL2.Head)
 	fmt.Println("Intersection search result with heads only", intersectHeadsDupl)
+
+	fmt.Println("#### Checking if LL is a palindrome ####")
+	palindrome := linkedlist.LinkedList{}
+	palindrome.Add(1, 2, 2, 1)
+
+	noPalindrome := linkedlist.LinkedList{}
+	noPalindrome.Add(1, 2, 3)
+
+	fmt.Printf(
+		"Palindrome check of a palindrome list %s: %t\n",
+		palindrome,
+		linkedlist.SimplePalindromeCheck(&palindrome),
+	)
+
+	fmt.Printf(
+		"Palindrome check of a non-palindrome list %s: %t\n",
+		noPalindrome,
+		linkedlist.SimplePalindromeCheck(&noPalindrome),
+	)
+
+	fmt.Printf(
+		"Head-only palindrome check of a palindrome list  %s: %t\n",
+		palindrome,
+		linkedlist.SimplePalindromeCheckHead(palindrome.Head),
+	)
+
+	fmt.Printf(
+		"Head-only Palindrome check of a palindrome list %s: %t\n",
+		noPalindrome,
+		linkedlist.SimplePalindromeCheckHead(noPalindrome.Head),
+	)
 }
