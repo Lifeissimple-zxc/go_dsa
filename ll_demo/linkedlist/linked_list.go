@@ -384,7 +384,7 @@ func SimplePalindromeCheckHead(head *Node) bool {
 		return true
 	}
 	var cursor *Node
-	var listData []int
+	var listData []int // can be optimized by using make and then appending when cap is exceeded?
 
 	for cursor = head; cursor != nil; cursor = cursor.Next {
 		listData = append(listData, cursor.Val)
@@ -398,4 +398,64 @@ func SimplePalindromeCheckHead(head *Node) bool {
 		cursor = cursor.Next
 	}
 	return true
+}
+
+// HasCycle checks if a given linked list has a cycle within it
+func HasCycle(l *LinkedList) bool {
+	if l.Head == nil || l == nil || l.Head.Next == nil {
+		return false
+	}
+	seen := make(map[int][]*Node)
+
+	for cursor := l.Head; cursor != nil; cursor = cursor.Next {
+		// no next == no cycle
+		if cursor.Next == nil {
+			return false
+		}
+
+		nxts, ok := seen[cursor.Val]
+		// First time seen value
+		if !ok {
+			res := make([]*Node, 1)
+			res[0], seen[cursor.Val] = cursor, res
+			continue
+		}
+		for _, p := range nxts {
+			if p == cursor.Next {
+				return true
+			}
+		}
+		seen[cursor.Val] = append(nxts, cursor.Next)
+	}
+	return false
+}
+
+// HasCycleHead is like HasCycle, but it operates using Node and not LinkedList
+func HasCycleHead(head *Node) bool {
+	if head == nil || head.Next == nil {
+		return false
+	}
+	seen := make(map[int][]*Node)
+
+	for cursor := head; cursor != nil; cursor = cursor.Next {
+		// no next == no cycle
+		if cursor.Next == nil {
+			return false
+		}
+
+		nxts, ok := seen[cursor.Val]
+		// First time seen value
+		if !ok {
+			res := make([]*Node, 1)
+			res[0], seen[cursor.Val] = cursor, res
+			continue
+		}
+		for _, p := range nxts {
+			if p == cursor.Next {
+				return true
+			}
+		}
+		seen[cursor.Val] = append(nxts, cursor.Next)
+	}
+	return false
 }

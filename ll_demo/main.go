@@ -100,4 +100,51 @@ func main() {
 		noPalindrome,
 		linkedlist.SimplePalindromeCheckHead(noPalindrome.Head),
 	)
+
+	fmt.Println("#### Checking if LL is has a cycle ####")
+	nonCycledOneNodeLL := linkedlist.LinkedList{}
+	nonCycledOneNodeLL.Add(1)
+	fmt.Printf(
+		"Does %s have a cycle? Result: %t\n",
+		nonCycledOneNodeLL,
+		linkedlist.HasCycle(&nonCycledOneNodeLL),
+	)
+
+	noCycleLL := linkedlist.LinkedList{}
+	noCycleLL.Add(1, 2, 3)
+	fmt.Printf(
+		"Does %s have a cycle? Result: %t\n",
+		noCycleLL,
+		linkedlist.HasCycle(&noCycleLL),
+	)
+
+	LLWithCycle := linkedlist.LinkedList{}
+	LLWithCycle.Add(3, 2)
+	tl := LLWithCycle.Tail
+	LLWithCycle.Add(0, 4)
+	fmt.Printf("Pre cycling LL that is to be cycled now: %s\n", LLWithCycle)
+	LLWithCycle.Tail.Next = tl
+
+	fmt.Printf(
+		"Does cycled list have a cycle? Result: %t\n",
+		linkedlist.HasCycle(&LLWithCycle),
+	)
+
+	fmt.Printf(
+		"Head only check for cycle for %s: %t\n",
+		nonCycledOneNodeLL,
+		linkedlist.HasCycleHead(nonCycledOneNodeLL.Head),
+	)
+
+	fmt.Printf(
+		"Head only check for cycle for %s: %t\n",
+		noCycleLL,
+		linkedlist.HasCycleHead(noCycleLL.Head),
+	)
+
+	fmt.Printf(
+		"Head only check for cycle for a list with cycle: %t\n",
+		linkedlist.HasCycleHead(LLWithCycle.Head),
+	)
+
 }
