@@ -78,27 +78,27 @@ func main() {
 	noPalindrome.Add(1, 2, 3)
 
 	fmt.Printf(
-		"Palindrome check of a palindrome list %s: %t\n",
-		palindrome,
-		linkedlist.SimplePalindromeCheck(&palindrome),
-	)
-
-	fmt.Printf(
-		"Palindrome check of a non-palindrome list %s: %t\n",
-		noPalindrome,
-		linkedlist.SimplePalindromeCheck(&noPalindrome),
-	)
-
-	fmt.Printf(
-		"Head-only palindrome check of a palindrome list  %s: %t\n",
+		"Simple head-only palindrome check of a palindrome list  %s: %t\n",
 		palindrome,
 		linkedlist.SimplePalindromeCheckHead(palindrome.Head),
 	)
 
 	fmt.Printf(
-		"Head-only Palindrome check of a palindrome list %s: %t\n",
+		"Slow & Fast pointer palindrome check of a palindrome list  %s: %t\n",
+		palindrome,
+		linkedlist.IsPalindrome(&palindrome),
+	)
+
+	fmt.Printf(
+		"Simple head-only Palindrome check of a non-palindrome list %s: %t\n",
 		noPalindrome,
 		linkedlist.SimplePalindromeCheckHead(noPalindrome.Head),
+	)
+
+	fmt.Printf(
+		"Slow & Fast pointer palindrome check of a non-palindrome list %s: %t\n",
+		noPalindrome,
+		linkedlist.IsPalindrome(&noPalindrome),
 	)
 
 	fmt.Println("#### Checking if LL is has a cycle ####")

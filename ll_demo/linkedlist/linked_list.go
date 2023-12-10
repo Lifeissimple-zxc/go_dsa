@@ -14,6 +14,18 @@ func (n Node) String() string {
 	return strconv.Itoa(n.Val)
 }
 
+func (n *Node) Traverse() string {
+	sb := strings.Builder{}
+	for cursor := n; cursor != nil; cursor = cursor.Next {
+		sb.WriteString(strconv.Itoa(cursor.Val))
+		if cursor.Next != nil {
+			sb.WriteString("->")
+		}
+	}
+	return sb.String()
+
+}
+
 type LinkedList struct {
 	Head *Node
 	Tail *Node
@@ -396,6 +408,87 @@ func SimplePalindromeCheckHead(head *Node) bool {
 			return false
 		}
 		cursor = cursor.Next
+	}
+	return true
+}
+
+// IsPalindrome implements a slow and fast pointer algo
+// to determine if a linked list is a palindrome.
+// Time complexity: O(n). Space complexity: O(1).
+func IsPalindrome(l *LinkedList) bool {
+	// Find middle of the list using 2 pointers (can be a func)
+	subList := locateMiddle(l.Head)
+	// Reverse second half (nneds to be a func to avoid modifying a list in place)
+	subList = ReverseUsingHead(subList, false)
+	// Compare reversed half with the first half
+	// of the original list node by node
+	return compareUsingHead(l.Head, subList)
+}
+
+func locateMiddle(node *Node) *Node {
+	fast, slow := node, node
+	for fast != nil && fast.Next != nil {
+		fast, slow = fast.Next.Next, slow.Next
+	}
+	return slow
+}
+
+func copy(node *Node) *Node {
+	if node == nil {
+		return nil
+	}
+	// create a new pointer to head
+	newHead := &Node{
+		Val: node.Val,
+	}
+	originalCursor := node
+	newCursor := newHead
+
+	for originalCursor.Next != nil {
+		// Traversal of original list
+		originalCursor = originalCursor.Next
+		newCursor.Next = &Node{
+			Val: originalCursor.Val,
+		}
+		// Traversal of new list
+		newCursor = newCursor.Next
+	}
+
+	return newHead
+}
+
+func reverse(node *Node) *Node {
+	var prev *Node
+	cursor := node
+	for cursor != nil {
+		// Saving next to a variable coz
+		// things will change for cursor
+		nxt := cursor.Next
+		// Reverse next pointer of current node
+		cursor.Next = prev
+		// Move prev (needed for reverse the following nodes)
+		prev = cursor
+		// Move cursor to continue traversal
+		cursor = nxt
+	}
+	return prev
+}
+
+func ReverseUsingHead(head *Node, inplace bool) *Node {
+	listStart := head
+	if !inplace {
+		listStart = copy(head)
+	}
+	return reverse(listStart)
+}
+
+func compareUsingHead(head1, head2 *Node) bool {
+	cursor1, cursor2 := head1, head2
+	for cursor1 != nil && cursor2 != nil {
+		if cursor1.Val != cursor2.Val {
+			return false
+		}
+		cursor1, cursor2 = cursor1.Next, cursor2.Next
 	}
 	return true
 }
