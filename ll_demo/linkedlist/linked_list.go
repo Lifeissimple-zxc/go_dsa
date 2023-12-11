@@ -498,27 +498,19 @@ func HasCycle(l *LinkedList) bool {
 	if l.Head == nil || l == nil || l.Head.Next == nil {
 		return false
 	}
-	seen := make(map[int][]*Node)
+	seen := make(map[*Node]bool)
 
 	for cursor := l.Head; cursor != nil; cursor = cursor.Next {
 		// no next == no cycle
 		if cursor.Next == nil {
 			return false
 		}
-
-		nxts, ok := seen[cursor.Val]
+		_, ok := seen[cursor]
 		// First time seen value
-		if !ok {
-			res := make([]*Node, 1)
-			res[0], seen[cursor.Val] = cursor, res
-			continue
+		if ok {
+			return true
 		}
-		for _, p := range nxts {
-			if p == cursor.Next {
-				return true
-			}
-		}
-		seen[cursor.Val] = append(nxts, cursor.Next)
+		seen[cursor] = true
 	}
 	return false
 }
@@ -528,27 +520,19 @@ func HasCycleHead(head *Node) bool {
 	if head == nil || head.Next == nil {
 		return false
 	}
-	seen := make(map[int][]*Node)
+	seen := make(map[*Node]interface{})
 
 	for cursor := head; cursor != nil; cursor = cursor.Next {
 		// no next == no cycle
 		if cursor.Next == nil {
 			return false
 		}
-
-		nxts, ok := seen[cursor.Val]
+		_, ok := seen[cursor]
 		// First time seen value
-		if !ok {
-			res := make([]*Node, 1)
-			res[0], seen[cursor.Val] = cursor, res
-			continue
+		if ok {
+			return true
 		}
-		for _, p := range nxts {
-			if p == cursor.Next {
-				return true
-			}
-		}
-		seen[cursor.Val] = append(nxts, cursor.Next)
+		seen[cursor] = struct{}{}
 	}
 	return false
 }
