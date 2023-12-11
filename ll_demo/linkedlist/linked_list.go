@@ -536,3 +536,29 @@ func HasCycleHead(head *Node) bool {
 	}
 	return false
 }
+
+// HasCycleTwoPointers checks if a linked list has a cycle
+// using slow & fast pointer algo
+func HasCycleTwoPointers(l *LinkedList) bool {
+	fast, slow := l.Head, l.Head
+	for fast != nil && fast.Next != nil {
+		fast, slow = fast.Next.Next, slow.Next
+		if fast == slow {
+			return true
+		}
+	}
+	return false
+}
+
+// HasCycleTwoPointersHead is like HasCycleTwoPointers,
+// but takes Node as input
+func HasCycleTwoPointersHead(head *Node) bool {
+	fast, slow := head, head
+	for fast != nil && fast.Next != nil {
+		fast, slow = fast.Next.Next, slow.Next
+		if fast == slow {
+			return true
+		}
+	}
+	return false
+}

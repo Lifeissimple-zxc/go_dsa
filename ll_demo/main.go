@@ -107,7 +107,7 @@ func main() {
 	fmt.Printf(
 		"Does %s have a cycle? Result: %t\n",
 		nonCycledOneNodeLL,
-		linkedlist.HasCycle(&nonCycledOneNodeLL),
+		linkedlist.HasCycleTwoPointers(&nonCycledOneNodeLL),
 	)
 
 	noCycleLL := linkedlist.LinkedList{}
@@ -115,7 +115,7 @@ func main() {
 	fmt.Printf(
 		"Does %s have a cycle? Result: %t\n",
 		noCycleLL,
-		linkedlist.HasCycle(&noCycleLL),
+		linkedlist.HasCycleTwoPointers(&noCycleLL),
 	)
 
 	LLWithCycle := linkedlist.LinkedList{}
@@ -133,18 +133,18 @@ func main() {
 	fmt.Printf(
 		"Head only check for cycle for %s: %t\n",
 		nonCycledOneNodeLL,
-		linkedlist.HasCycleHead(nonCycledOneNodeLL.Head),
+		linkedlist.HasCycleTwoPointersHead(nonCycledOneNodeLL.Head),
 	)
 
 	fmt.Printf(
 		"Head only check for cycle for %s: %t\n",
 		noCycleLL,
-		linkedlist.HasCycleHead(noCycleLL.Head),
+		linkedlist.HasCycleTwoPointersHead(noCycleLL.Head),
 	)
 
 	fmt.Printf(
 		"Head only check for cycle for a list with cycle: %t\n",
-		linkedlist.HasCycleHead(LLWithCycle.Head),
+		linkedlist.HasCycleTwoPointersHead(LLWithCycle.Head),
 	)
 
 }
