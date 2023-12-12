@@ -15,6 +15,9 @@ func SimpleMaxProduct(nums []int) int {
 		if cur1+1 <= len(nums)-1 {
 			cur1++
 		}
+
+		// test case [10, 2 ,5 , 2] fails
+		// Reason nums[cur2] > nums[maxIx2] is never true in this scenario
 		if cur2 >= 0 && nums[cur2] > nums[maxIx2] && cur2 != maxIx1 {
 			maxIx2 = cur2
 		}
