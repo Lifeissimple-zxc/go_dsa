@@ -166,5 +166,5 @@ func array_exercises() {
 	fmt.Printf("For array %+v max product is %d\n", nums4, array.SimpleMaxProduct((nums4)))
 
 	fmt.Println("#### Building Pascal Triangle ####")
-	fmt.Printf("Pascal triangle for %d is %+v", 5, array.PascalTriangle(5))
+	fmt.Printf("Pascal triangle for %d is %+v\n", 5, array.PascalTriangle(5))
 }
