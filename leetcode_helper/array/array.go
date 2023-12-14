@@ -2,8 +2,8 @@ package array
 
 import "fmt"
 
-// SimpleMaxProduct is a naive implementation of maxProduct algo
-func SimpleMaxProduct(nums []int) int {
+// TODO
+func MaxProduct(nums []int) int {
 	// max1 & max2 store max values
 	// maxIx stores indeces to max values in the array
 	var max1, max2, maxIx1, maxIx2 int
@@ -29,4 +29,27 @@ func SimpleMaxProduct(nums []int) int {
 
 }
 
-// TODO implement a simpler approach, it
+// SimpleMaxProduct is a naive solution to maxProduct array problem
+func SimpleMaxProduct(nums []int) int {
+	var max1, max2, maxIx1, maxIx2 int
+	// find max index 1
+	for i, num := range nums {
+		if num > max1 {
+			maxIx1, max1 = i, num
+		}
+	}
+
+	// find max index 2
+	for i, num := range nums {
+		// account for ix already occupied by first max
+		if i == maxIx1 {
+			continue
+		}
+		if num > max2 && num <= max1 {
+			maxIx2, max2 = i, num
+		}
+	}
+	// return product of the twop
+	return (nums[maxIx1] - 1) * (nums[maxIx2] - 1)
+
+}
