@@ -31,13 +31,14 @@ func MaxProduct(nums []int) int {
 
 // SimpleMaxProduct is a naive solution to maxProduct array problem
 func SimpleMaxProduct(nums []int) int {
-	var max1, max2, maxIx1, maxIx2 int
+	var max, maxIx1, maxIx2 int
 	// find max index 1
 	for i, num := range nums {
-		if num > max1 {
-			maxIx1, max1 = i, num
+		if num > max {
+			maxIx1, max = i, num
 		}
 	}
+	max = 0
 
 	// find max index 2
 	for i, num := range nums {
@@ -45,11 +46,34 @@ func SimpleMaxProduct(nums []int) int {
 		if i == maxIx1 {
 			continue
 		}
-		if num > max2 && num <= max1 {
-			maxIx2, max2 = i, num
+		if num > max && num <= nums[maxIx1] {
+			maxIx2, max = i, num
 		}
 	}
 	// return product of the twop
 	return (nums[maxIx1] - 1) * (nums[maxIx2] - 1)
 
+}
+
+func PascalTriangle(numRows int) [][]int {
+	// Allocate array
+	triangle := make([][]int, numRows)
+	// Add triangle rows
+	for i := range triangle {
+		triangle[i] = generatePascalRow(i, triangle)
+	}
+	return triangle
+
+}
+
+func generatePascalRow(numRow int, triangle [][]int) []int {
+	row := make([]int, numRow+1)
+	for i := range row {
+		if i == 0 || i == numRow {
+			row[i] = 1
+			continue
+		}
+		row[i] = triangle[numRow-1][i-1] + triangle[numRow-1][i]
+	}
+	return row
 }
