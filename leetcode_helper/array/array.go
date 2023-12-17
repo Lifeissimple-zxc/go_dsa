@@ -77,3 +77,28 @@ func generatePascalRow(numRow int, triangle [][]int) []int {
 	}
 	return row
 }
+
+func SingleNumber(nums []int) int {
+	// Keep track of what was seen how many times
+	tracker := make(map[int]int)
+	var res *int
+	// Iterate over array & count occurrences
+	for _, num := range nums {
+		seen, ok := tracker[num]
+		// Non-first time occurrence
+		if ok {
+			seen++
+		} else {
+			seen = 1
+		}
+		tracker[num] = seen
+	}
+	// Locate value with 1 occurrence
+	for num, seen := range tracker {
+		if seen == 1 {
+			res = &num
+			break
+		}
+	}
+	return *res
+}

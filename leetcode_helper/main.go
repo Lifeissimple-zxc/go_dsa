@@ -67,13 +67,13 @@ func linked_list_exercises() {
 	intersectNode := linkedlist.FindIntersection(&iLL1, &iLL2)
 	fmt.Println("Intersection search result (assuming list are unique):", intersectNode)
 
-	intersectNodeDupl := linkedlist.FindIntersectionWithDuplicates(&iLL1, &iLL2)
+	intersectNodeDupl := linkedlist.FindIntersection(&iLL1, &iLL2)
 	fmt.Println("Intersection search result ", intersectNodeDupl)
 
 	intersectHeads := linkedlist.FindIntersectionHeads(iLL1.Head, iLL2.Head)
 	fmt.Println("Intersection search result with heads only", intersectHeads)
 
-	intersectHeadsDupl := linkedlist.FindIntersectionHeadsWithDuplicates(iLL1.Head, iLL2.Head)
+	intersectHeadsDupl := linkedlist.FindIntersectionHeads(iLL1.Head, iLL2.Head)
 	fmt.Println("Intersection search result with heads only", intersectHeadsDupl)
 
 	fmt.Println("#### Checking if LL is a palindrome ####")
@@ -167,4 +167,18 @@ func array_exercises() {
 
 	fmt.Println("#### Building Pascal Triangle ####")
 	fmt.Printf("Pascal triangle for %d is %+v\n", 5, array.PascalTriangle(5))
+
+	fmt.Println("#### Locating single number ###")
+	singleNumsArr := []int{2, 2, 1}
+	singleNumsArr2 := []int{4, 1, 2, 1, 2}
+	fmt.Printf(
+		"%+v array's single number is %d\n",
+		singleNumsArr,
+		array.SingleNumber((singleNumsArr)),
+	)
+	fmt.Printf(
+		"%+v array's single number is %d\n",
+		singleNumsArr2,
+		array.SingleNumber((singleNumsArr2)),
+	)
 }
