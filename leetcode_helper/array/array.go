@@ -133,11 +133,30 @@ func MajEl(nums []int) int {
 	}
 	// Return major element
 	for num, seen := range tracker {
-		fmt.Println(res, num, seen)
 		if seen > (arrLen / 2) {
 			res = num
 			break
 		}
 	}
 	return res
+}
+
+// MajorElBoyerMoore implements Boyer-Moore Majority Vote Algorithm
+func MajorElBoyerMoore(nums []int) int {
+	majority, cnt := 0, 0
+	for _, num := range nums {
+		if cnt == 0 {
+			majority, cnt = num, 1
+			continue
+		}
+		if majority == num {
+			cnt++
+		} else {
+			cnt--
+		}
+		if cnt > (len(nums) / 2) {
+			break
+		}
+	}
+	return majority
 }

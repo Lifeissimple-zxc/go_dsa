@@ -194,8 +194,8 @@ func array_exercises() {
 	)
 
 	fmt.Println("#### Locating Major Number ###")
-	majorNums1 := []int{1, 1, 1, 1, 2, 2, 3}
-	majorNums2 := []int{9, 9, 9, 9, 9, 1, 2, 2, 3}
+	majorNums1 := []int{3, 2, 3}
+	majorNums2 := []int{2, 2, 1, 1, 1, 2, 2}
 	fmt.Printf(
 		"%+v array's major number is %d\n",
 		majorNums1,
@@ -205,5 +205,15 @@ func array_exercises() {
 		"%+v array's major number is %d\n",
 		majorNums2,
 		array.MajEl((majorNums2)),
+	)
+	fmt.Printf(
+		"%+v array's major number (Boyer-Moore Majority Vote Algorithm) is %d\n",
+		majorNums1,
+		array.MajorElBoyerMoore((majorNums1)),
+	)
+	fmt.Printf(
+		"%+v array's major number (Boyer-Moore Majority Vote Algorithm) is %d\n",
+		majorNums2,
+		array.MajorElBoyerMoore((majorNums2)),
 	)
 }
