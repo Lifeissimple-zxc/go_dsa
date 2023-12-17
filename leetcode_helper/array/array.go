@@ -102,3 +102,42 @@ func SingleNumber(nums []int) int {
 	}
 	return *res
 }
+
+func SingleNumberBitWiseXOR(nums []int) int {
+	xor := 0
+	for _, num := range nums {
+		xor ^= num
+	}
+	return xor
+}
+
+// MajEl locates element of the array that has >len(arr)
+// occurences within it
+func MajEl(nums []int) int {
+	arrLen := len(nums)
+	var res int
+	// Edge case
+	if arrLen == 1 {
+		return nums[0]
+	}
+	// Count occurrences
+	tracker := make(map[int]int)
+	for _, num := range nums {
+		seen, ok := tracker[num]
+		if ok {
+			seen++
+		} else {
+			seen = 1
+		}
+		tracker[num] = seen
+	}
+	// Return major element
+	for num, seen := range tracker {
+		fmt.Println(res, num, seen)
+		if seen > (arrLen / 2) {
+			res = num
+			break
+		}
+	}
+	return res
+}

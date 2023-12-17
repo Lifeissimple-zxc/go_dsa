@@ -181,4 +181,29 @@ func array_exercises() {
 		singleNumsArr2,
 		array.SingleNumber((singleNumsArr2)),
 	)
+
+	fmt.Printf(
+		"%+v array's single number (bitwise XOR) is %d\n",
+		singleNumsArr,
+		array.SingleNumberBitWiseXOR((singleNumsArr)),
+	)
+	fmt.Printf(
+		"%+v array's single number (bitwise XOR) is %d\n",
+		singleNumsArr2,
+		array.SingleNumberBitWiseXOR((singleNumsArr2)),
+	)
+
+	fmt.Println("#### Locating Major Number ###")
+	majorNums1 := []int{1, 1, 1, 1, 2, 2, 3}
+	majorNums2 := []int{9, 9, 9, 9, 9, 1, 2, 2, 3}
+	fmt.Printf(
+		"%+v array's major number is %d\n",
+		majorNums1,
+		array.MajEl((majorNums1)),
+	)
+	fmt.Printf(
+		"%+v array's major number is %d\n",
+		majorNums2,
+		array.MajEl((majorNums2)),
+	)
 }
