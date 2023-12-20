@@ -216,4 +216,13 @@ func array_exercises() {
 		majorNums2,
 		array.MajorElBoyerMoore((majorNums2)),
 	)
+
+	fmt.Println("#### Moving Zeroes ###")
+	moveZeroArr := []int{0, 1, 0, 3, 12}
+	fmt.Printf("Array before MoveZeroes %+v\n", moveZeroArr)
+	array.SimpleMoveZeroes(moveZeroArr)
+	fmt.Printf("Array after MoveZeroes %+v\n", moveZeroArr)
+	array.SelectionSort(moveZeroArr[:3])
+	fmt.Printf("Array after sort %+v\n", moveZeroArr)
+
 }

@@ -160,3 +160,76 @@ func MajorElBoyerMoore(nums []int) int {
 	}
 	return majority
 }
+
+// SimpleMoveZeroes implements a naive solution to Move Zeroes problem
+func SimpleMoveZeroes(nums []int) {
+	// Edge cases
+	if len(nums) <= 1 {
+		return
+	}
+	// Move zeroes to the end of the array, works
+	// decide on how long left traverses
+	leftSteps := len(nums) / 2
+	if len(nums)%2 != 0 {
+		leftSteps++
+	}
+	lt := 0
+	for rt := len(nums) - 1; lt < leftSteps; lt++ {
+		if nums[lt] == 0 && nums[rt] != 0 {
+			nums[lt], nums[rt] = nums[rt], nums[lt]
+			rt--
+			continue
+		}
+		if nums[lt] == 0 {
+			rt--
+		}
+	}
+	// lt shows index where zeroes start
+	fmt.Println("Zeroes start at", lt)
+	// Sort non-zero part
+}
+
+// BubbleSort implements a bubble sort algo: O(n^2)
+func BubbleSort(nums []int) {
+	// Iterate over array
+	for i := 0; i < len(nums); i++ {
+		// Inner loop over all elements but the last one
+		// It decreases by i because outer loop shrinks # of elements to iterate over
+		for j := 0; j < len(nums)-i-1; j++ {
+			// If current is greater than next, we swap them
+			if nums[j] > nums[j+1] {
+				nums[j], nums[j+1] = nums[j+1], nums[j]
+			}
+		}
+	}
+}
+
+// InsertionSort implements an insertion sort algo: O(n^2)
+func InsertionSort(nums []int) {
+	// Traverse the array starting at the 2nd element
+	for i := 1; i < len(nums); i++ {
+		cur := nums[i]
+		lag_index := i - 1
+		for lag_index > -1 && cur < nums[lag_index] {
+			nums[lag_index+1] = nums[lag_index]
+			lag_index--
+		}
+		nums[lag_index+1] = cur
+	}
+}
+
+// SelectionSort implements an selection sort algo: O(n^2)
+func SelectionSort(nums []int) {
+	// find smallest element, put it to the start of the array
+	for i := 0; i < len(nums); i++ {
+		minIx := i
+		for j := i + 1; j < len(nums); j++ {
+			if nums[j] < nums[minIx] {
+				minIx = j
+			}
+		}
+		if minIx != i {
+			nums[i], nums[minIx] = nums[minIx], nums[i]
+		}
+	}
+}
