@@ -222,7 +222,13 @@ func array_exercises() {
 	fmt.Printf("Array before MoveZeroes %+v\n", moveZeroArr)
 	array.SimpleMoveZeroes(moveZeroArr)
 	fmt.Printf("Array after MoveZeroes %+v\n", moveZeroArr)
-	array.SelectionSort(moveZeroArr[:3])
-	fmt.Printf("Array after sort %+v\n", moveZeroArr)
+	moveZeroArr2 := []int{1, 0, 0}
+	fmt.Printf("Array2 before MoveZeroes %+v\n", moveZeroArr2)
+	array.SimpleMoveZeroes(moveZeroArr2)
+	fmt.Printf("Array2 after MoveZeroes %+v\n", moveZeroArr2)
+	moveZeroArr3 := []int{1, 2}
+	fmt.Printf("Array2 before MoveZeroes %+v\n", moveZeroArr3)
+	array.SimpleMoveZeroes(moveZeroArr2)
+	fmt.Printf("Array2 after MoveZeroes %+v\n", moveZeroArr3)
 
 }

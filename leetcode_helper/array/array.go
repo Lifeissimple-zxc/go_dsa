@@ -1,6 +1,8 @@
 package array
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // TODO
 func MaxProduct(nums []int) int {
@@ -163,6 +165,8 @@ func MajorElBoyerMoore(nums []int) int {
 
 // SimpleMoveZeroes implements a naive solution to Move Zeroes problem
 func SimpleMoveZeroes(nums []int) {
+
+	// TODO sorting is not needed, elems of the oring array need to have their original placement!
 	// Edge cases
 	if len(nums) <= 1 {
 		return
@@ -173,8 +177,7 @@ func SimpleMoveZeroes(nums []int) {
 	if len(nums)%2 != 0 {
 		leftSteps++
 	}
-	lt := 0
-	for rt := len(nums) - 1; lt < leftSteps; lt++ {
+	for lt, rt := 0, len(nums)-1; lt < leftSteps; lt++ {
 		if nums[lt] == 0 && nums[rt] != 0 {
 			nums[lt], nums[rt] = nums[rt], nums[lt]
 			rt--
@@ -184,9 +187,19 @@ func SimpleMoveZeroes(nums []int) {
 			rt--
 		}
 	}
-	// lt shows index where zeroes start
-	fmt.Println("Zeroes start at", lt)
-	// Sort non-zero part
+	// Find ix where zeroes start
+	zeroIx := 0
+	for _, val := range nums {
+		if val != 0 {
+			zeroIx++
+		}
+	}
+	// Sort non-zero part if there is any
+	if zeroIx == 0 {
+		BubbleSort(nums)
+	} else if zeroIx > 1 {
+		BubbleSort(nums[:zeroIx])
+	}
 }
 
 // BubbleSort implements a bubble sort algo: O(n^2)
@@ -232,4 +245,35 @@ func SelectionSort(nums []int) {
 			nums[i], nums[minIx] = nums[minIx], nums[i]
 		}
 	}
+}
+
+// MergeSort implements a merge sort algo does not work
+func MergeSort(nums []int) []int {
+	// Divide an conquer algo, recursive
+	// base case
+	if len(nums) < 2 {
+		return nums
+	}
+	mid := len(nums) / 2
+	left, right := nums[:mid], nums[mid:]
+	return merge(MergeSort(left), MergeSort(right))
+
+}
+
+// merge is a building block for MergeSort
+func merge(left, right []int) []int {
+	res := make([]int, 0, len(left)+len(right))
+	l, r := 0, 0
+	for l < len(left) && r < len(right) {
+		if left[l] <= right[r] {
+			res = append(res, left[l])
+		} else {
+			res = append(res, right[r])
+		}
+	}
+	// Account for difference in left and right lens
+	res = append(res, left[l:]...)
+	res = append(res, right[r:]...)
+	return res
+
 }
