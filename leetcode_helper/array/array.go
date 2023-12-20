@@ -165,40 +165,19 @@ func MajorElBoyerMoore(nums []int) int {
 
 // SimpleMoveZeroes implements a naive solution to Move Zeroes problem
 func SimpleMoveZeroes(nums []int) {
-
-	// TODO sorting is not needed, elems of the oring array need to have their original placement!
-	// Edge cases
-	if len(nums) <= 1 {
-		return
-	}
-	// Move zeroes to the end of the array, works
-	// decide on how long left traverses
-	leftSteps := len(nums) / 2
-	if len(nums)%2 != 0 {
-		leftSteps++
-	}
-	for lt, rt := 0, len(nums)-1; lt < leftSteps; lt++ {
-		if nums[lt] == 0 && nums[rt] != 0 {
-			nums[lt], nums[rt] = nums[rt], nums[lt]
-			rt--
+	// Traverse all elements of the array
+	for i := 0; i < len(nums); i++ {
+		if nums[i] != 0 {
 			continue
 		}
-		if nums[lt] == 0 {
-			rt--
+		// Swap with first non-zero
+		for j := i + 1; j < len(nums); j++ {
+			if nums[j] != 0 {
+				nums[i], nums[j] = nums[j], nums[i]
+				break
+			}
 		}
-	}
-	// Find ix where zeroes start
-	zeroIx := 0
-	for _, val := range nums {
-		if val != 0 {
-			zeroIx++
-		}
-	}
-	// Sort non-zero part if there is any
-	if zeroIx == 0 {
-		BubbleSort(nums)
-	} else if zeroIx > 1 {
-		BubbleSort(nums[:zeroIx])
+
 	}
 }
 
