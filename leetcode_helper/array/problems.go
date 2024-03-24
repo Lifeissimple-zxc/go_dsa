@@ -1,0 +1,30 @@
+package array
+
+/*
+https://leetcode.com/problems/kids-with-the-greatest-number-of-candies
+There are n kids with candies. You are given an integer array candies,
+where each candies[i] represents the number of candies the ith kid has, and an integer extraCandies,
+denoting the number of extra candies that you have.
+
+Return a boolean array result of length n, where result[i] is true if,
+after giving the ith kid all the extraCandies,
+they will have the greatest number of candies among all the kids, or false otherwise.
+
+Note that multiple kids can have the greatest number of candies.
+*/
+func KidsWithCandies(candies []int, extraCandies int) []bool {
+	res := make([]bool, len(candies))
+	// Special case of 1 kid
+	if len(candies) == 1 {
+		res[0] = true
+		return res
+	}
+	// General case with many kids
+	// Locate the max
+	maxCandies := findMax(candies)
+	// Compute result
+	for i, candies := range candies {
+		res[i] = (candies + extraCandies) >= maxCandies
+	}
+	return res
+}
