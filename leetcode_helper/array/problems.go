@@ -72,3 +72,56 @@ func CanPlaceFlowers(flowerbed []int, n int) bool {
 	}
 	return n <= 0
 }
+
+func ReverseVowels(s string) string {
+	res := []byte(s)
+	if len(res) == 1 {
+		return s
+	}
+	vowels := map[string]struct{}{
+		"a": {},
+		"A": {},
+		"e": {},
+		"i": {},
+		"E": {},
+		"I": {},
+		"u": {},
+		"U": {},
+		"o": {},
+		"O": {},
+	}
+	// Traverse string from both ends
+	// until either cursor crosses the middle
+	for l, r := 0, len(res)-1; l < r; {
+		_, lv := vowels[string(res[l])]
+		_, rv := vowels[string(res[r])]
+		// left and right are vowels
+		if lv && rv {
+			res[l], res[r] = res[r], res[l]
+			l++
+			r--
+		} else if lv {
+			// left is vowel, right is not, so we move just right
+			r--
+		} else if rv {
+			// right is vowel, left is not, so we move just left
+			l++
+		} else {
+			// both are not vowels, move both
+			l++
+			r--
+		}
+	}
+	return string(res)
+}
+
+func isVowel(chr byte) bool {
+	switch string(chr) {
+	case "a", "e", "i", "u", "o":
+		return true
+	case "A", "E", "I", "U", "O":
+		return true
+	default:
+		return false
+	}
+}

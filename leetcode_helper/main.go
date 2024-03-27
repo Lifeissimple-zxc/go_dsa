@@ -231,4 +231,7 @@ func array_exercises() {
 	array.SimpleMoveZeroes(moveZeroArr2)
 	fmt.Printf("Array2 after MoveZeroes %+v\n", moveZeroArr3)
 
+	fmt.Println("#### reverse vowels ###")
+	res := array.ReverseVowels(" ipG0A4mAas::si0m4a0Gp0")
+	fmt.Println(res)
 }
