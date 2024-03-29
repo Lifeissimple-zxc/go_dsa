@@ -234,4 +234,7 @@ func array_exercises() {
 	fmt.Println("#### reverse vowels ###")
 	res := array.ReverseVowels(" ipG0A4mAas::si0m4a0Gp0")
 	fmt.Println(res)
+
+	fmt.Println("#### Greatest Common Divisor of Strings ###")
+	fmt.Println(array.GCDOfStrings("ABCABC", "ABC"))
 }

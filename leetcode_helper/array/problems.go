@@ -177,3 +177,39 @@ func MergeAlternately(word1 string, word2 string) string {
 	}
 	return string(res)
 }
+
+func GCDOfStrings(str1, str2 string) string {
+	// Get min len
+	minLen := len(str1)
+	if len(str2) < minLen {
+		minLen = len(str2)
+	}
+	// Check prefixes within that len, we can use whatever string
+	// because both have at least min len
+	for i := minLen; i > 0; i-- {
+		prfx := str1[:i]
+		if isDivisor(prfx, str1, str2) {
+			return prfx
+		}
+	}
+	return ""
+}
+
+func isDivisor(subs, str1, str2 string) bool {
+	// len needs to be a factor of both string lens
+	if len(str1)%len(subs) != 0 || len(str2)%len(subs) != 0 {
+		return false
+	}
+	tmp := ""
+	for f := 0; f < len(str1)/len(subs); f++ {
+		tmp += subs
+	}
+	if tmp != str1 {
+		return false
+	}
+	tmp = ""
+	for f := 0; f < len(str2)/len(subs); f++ {
+		tmp += subs
+	}
+	return tmp == str2
+}
