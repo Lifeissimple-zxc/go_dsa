@@ -96,5 +96,4 @@ func TestGCDOfStrings(t *testing.T) {
 			assert.Equal(t, tt.want, GCDOfStrings(tt.args.str1, tt.args.str2))
 		})
 	}
-
 }
