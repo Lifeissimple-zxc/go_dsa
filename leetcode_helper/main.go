@@ -237,4 +237,7 @@ func array_exercises() {
 
 	fmt.Println("#### Greatest Common Divisor of Strings ###")
 	fmt.Println(array.GCDOfStrings("ABCABC", "ABC"))
+
+	fmt.Println("#### Reverse words in a string ###")
+	fmt.Println(array.ReverseWordsInAString("the sky is blue"))
 }

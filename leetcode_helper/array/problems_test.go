@@ -97,3 +97,28 @@ func TestGCDOfStrings(t *testing.T) {
 		})
 	}
 }
+
+func TestReverseWordsInAString(t *testing.T) {
+	tests := []struct {
+		s    string
+		want string
+	}{
+		{
+			s:    "the sky is blue",
+			want: "blue is sky the",
+		},
+		{
+			s:    "  hello world  ",
+			want: "world hello",
+		},
+		{
+			s:    "a good   example",
+			want: "example good a",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.s, func(t *testing.T) {
+			assert.Equal(t, tt.want, ReverseWordsInAString(tt.s))
+		})
+	}
+}
