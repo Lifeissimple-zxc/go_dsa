@@ -290,3 +290,63 @@ func ReverseWordsInAString(s string) string {
 	}
 	return res
 }
+
+func IncreasingTriplet(nums []int) bool {
+	for i := 0; i < len(nums)-2; i++ {
+		// Check all +1 of i to see if there is a j that satisfies the condition
+		var validJ int
+		for j := i + 1; j < len(nums)-1; j++ {
+			if nums[i] < nums[j] {
+				validJ = j
+			}
+		}
+		if validJ == 0 {
+			continue
+		}
+
+		for k := validJ + 1; k < len(nums); k++ {
+			fmt.Println(nums[i], nums[validJ], nums[k])
+			if nums[validJ] < nums[k] {
+				fmt.Println("returning")
+				return true
+			}
+		}
+	}
+	return false
+}
+
+func MaxOperations(nums []int, k int) int {
+	ops := 0
+	usedIx := make(map[int]struct{})
+	for l, r := 0, len(nums)-1; l < r; {
+		fmt.Println(l, r)
+		if _, ok := usedIx[l]; ok {
+			fmt.Println("l", l, "was already used")
+			l++
+			continue
+		}
+		if _, ok := usedIx[r]; ok {
+			fmt.Println("r", r, "was already used")
+			if r-1 == l {
+				l, r = l+1, len(nums)-1
+			} else {
+				r--
+			}
+			continue
+		}
+		if nums[l]+nums[r] == k {
+			ops++
+			usedIx[l], usedIx[r] = struct{}{}, struct{}{}
+			fmt.Println("sum match!", l, r, usedIx)
+			l++
+		}
+		// Getting here means sum is not k
+		if r-l == 1 {
+			fmt.Println("l and r have almost met")
+			l, r = l+1, len(nums)-1
+		} else {
+			r--
+		}
+	}
+	return ops
+}

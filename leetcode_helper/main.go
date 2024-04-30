@@ -240,4 +240,15 @@ func array_exercises() {
 
 	fmt.Println("#### Reverse words in a string ###")
 	fmt.Println(array.ReverseWordsInAString("the sky is blue"))
+
+	fmt.Println("#### Increasing triplet ###")
+	fmt.Println(array.IncreasingTriplet(
+		[]int{4, 5, 2147483647, 1, 2},
+	))
+
+	fmt.Println("#### Max Operations ###")
+	fmt.Println(array.MaxOperations(
+		[]int{2, 2, 2, 3, 1, 1, 4, 1},
+		4,
+	))
 }
