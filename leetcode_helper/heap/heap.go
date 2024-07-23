@@ -58,31 +58,42 @@ func (h *MaxHeapInt) heapifyUp(i int) {
 func (h *MaxHeapInt) heapifyDown(i int) {
 	lastIndex := len(h.s) - 1
 	left, right := GetLeftChild(i), GetRightChild(i)
-	childToCompare := 0
+	childToCompare := right // assume right is larger
 
-	for left <= lastIndex {
-		if left == lastIndex {
-			// left is the only child
-			childToCompare = left
-		} else if h.s[left] > h.s[right] {
-			// left is larger
-			childToCompare = left
-		} else {
-			// right is larger
-			childToCompare = right
-		}
+	// iterative implementation
+	// for left <= lastIndex {
+	// 	childToCompare = right // assume right is larger
+	// 	if left == lastIndex || h.s[left] > h.s[right] {
+	// 		// update if left is the only child or left is larger
+	// 		childToCompare = left
+	// 	}
 
-		// swap if possible
-		if h.s[i] < h.s[childToCompare] {
-			h.swap(i, childToCompare)
-			// update helper vars to continue traversal
-			i = childToCompare
-			left, right = GetLeftChild(i), GetRightChild(i)
-		} else {
-			return
-		}
+	// 	if h.s[childToCompare] <= h.s[i] {
+	// 		// getting here means no more swaps are needed
+	// 		return
+	// 	}
+	// 	// swap if possible
+	// 	h.swap(i, childToCompare)
+	// 	// update helper vars to continue traversal
+	// 	i = childToCompare
+	// 	left, right = GetLeftChild(i), GetRightChild(i)
+	// }
 
+	// recursive implementation
+	// base case
+	if left > lastIndex {
+		return
 	}
+	if left == lastIndex || h.s[left] > h.s[right] {
+		// update if left is the only child or left is larger
+		childToCompare = left
+	}
+	if h.s[childToCompare] <= h.s[i] {
+		// getting here means no more swaps are needed
+		return
+	}
+	h.swap(i, childToCompare)
+	h.heapifyDown(childToCompare) // recursion
 
 }
 
