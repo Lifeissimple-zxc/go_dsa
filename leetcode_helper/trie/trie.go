@@ -4,7 +4,10 @@ import (
 	"strings"
 )
 
-const alphabetSize = 26
+const (
+	alphabetSize = 26
+	offsetASCIIa = 97
+)
 
 // Node represents a trie node
 type Node struct {
@@ -33,7 +36,7 @@ func (t *Trie) Insert(w string) {
 	cursor := t.root
 	for i := 0; i < wLen; i++ {
 		// offsetting with 'a' based on ascii tables
-		charIx := (strings.ToLower(w)[i]) - 'a'
+		charIx := (strings.ToLower(w)[i]) - offsetASCIIa
 		// empty char --> time to append
 		if cursor.children[charIx] == nil {
 			cursor.children[charIx] = &Node{}
@@ -52,7 +55,7 @@ func (t *Trie) Search(w string) bool {
 	cursor := t.root
 	for i := 0; i < wLen; i++ {
 		// offsetting with 'a' based on ascii tables
-		charIx := (strings.ToLower(w)[i]) - 'a'
+		charIx := (strings.ToLower(w)[i]) - offsetASCIIa
 		// empty char --> time to append
 		if cursor.children[charIx] == nil {
 			return false
@@ -68,7 +71,7 @@ func (t *Trie) prefix(prfx string) *Node {
 	cursor := t.root
 	for i := 0; i < wLen; i++ {
 		// offsetting with 'a' based on ascii tables
-		charIx := (strings.ToLower(prfx)[i]) - 'a'
+		charIx := (strings.ToLower(prfx)[i]) - offsetASCIIa
 		// empty char --> time to append
 		if cursor.children[charIx] == nil {
 			return nil
@@ -102,7 +105,7 @@ func (t *Trie) FindWords(prfx string, n int) []string {
 				return
 			}
 
-			prfx += string(i + 'a')
+			prfx += string(i + offsetASCIIa)
 			// word found
 			if c.isEnd {
 				res = append(res, prfx)
