@@ -125,3 +125,10 @@ func (t *Trie) FindWords(prfx string, n int) []string {
 
 // TODO func that returns a 2d slice with suggestions for each char from input:
 // https://leetcode.com/problems/search-suggestions-system/description/?envType=study-plan-v2&envId=leetcode-75
+func (t *Trie) GetSuggestions(word string, n int) [][]string {
+	res := make([][]string, 0, len(word))
+	for i := 1; i <= len(word); i++ {
+		res = append(res, t.FindWords(word[:i], n))
+	}
+	return res
+}

@@ -256,3 +256,56 @@ func merge(left, right []int) []int {
 	return res
 
 }
+
+func QuickSort(nums []int) {
+	quickSort(nums, 0, len(nums)-1)
+}
+
+func quickSort(nums []int, start, end int) {
+	// base case: an already sorted array
+	if start >= end {
+		return
+	}
+	// choose pivot
+	p := nums[medianThree(nums, start, end)]
+	// partition such that all items to the left are <= pivot and all items to the right are >= pivot
+	lp := partition(nums, start, end, p)
+	// at this point we swapped all we can, we only need to swap left pointer with the pivot
+	nums[lp], nums[end] = nums[end], nums[lp] // the last step of the partition!
+	// sort pre and post partition parts of the inpuit
+	quickSort(nums, start, lp-1)
+	quickSort(nums, lp+1, end)
+}
+
+func partition(nums []int, start, end, pivot int) int {
+	// allocate pointers for swaps that make the partitioning work
+	lp, rp := start, end
+	for lp < rp {
+		// find first item from the left that is <= pivot
+		for nums[lp] <= pivot && lp < rp {
+			lp++
+		}
+		// find first item from the left that is >= pivot
+		for nums[rp] >= pivot && lp < rp {
+			rp-- // we are moving right to left so we decrement!s
+		}
+		// at this point we found items to swap
+		nums[lp], nums[rp] = nums[rp], nums[lp]
+	}
+	return lp // we need lp hence returning it here
+}
+
+// medianThree chooses pivot index using median of three method.
+func medianThree(nums []int, start, end int) int {
+	mid := (end - start) / 2
+	a, b, c := nums[start], nums[mid], nums[end]
+	// is a our mid? != with two bool expressions is a XOR so one of the expressions needs to be false
+	if (a > b) != (a > c) {
+		// return start if it's the middle
+		return start
+	} else if (b > a) != (b > c) {
+		return mid
+	} else {
+		return end
+	}
+}
